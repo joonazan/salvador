@@ -20,19 +20,21 @@ describe('Addressing', () => {
 const testWithAddresses = addresses => {
 	var compareCalled = 0
 	salvador.address(
-		x => {
+		(x, cb) => {
 			compareCalled++
 			for (var i in addresses) {
 				if (addresses[i] <= x) {
-					return true
+					cb(true)
+					return
 				}
 			}
-			return false
+			cb(false)
 		},
-		x => {
+		(x, cb) => {
 			const i = addresses.indexOf(x)
 			i.must.not.be(-1)
 			addresses.splice(i, 1)
+			cb()
 		}
 	)
 	console.log('comparisons: ', compareCalled)

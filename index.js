@@ -1,27 +1,42 @@
+const address = (hasLEQ, onFind) => {
+	const MAX = 16777216
+	var start = 0
+	var end = MAX
 
-module.exports = {
-	address: (hasLEQ, onFind) => {
-		const MAX = 16777216
-		var start = 0
-		var end = MAX
-
-		while (hasLEQ(MAX)) {
-			while (start != end) {
-				var mid = split(start, end)
-				if (hasLEQ(mid)) {
+	const findOne = () => {
+		const split = () => {
+			var mid = selectMiddle(start, end)
+			hasLEQ(mid, has => {
+				if (has) {
 					end = mid
 				} else {
 					start = mid+1
 				}
-			}
 
-			onFind(start)
-			start = start+1
-			end = MAX
+				if (start != end) {
+					split()
+				} else {
+					onFind(start, () => {
+						start = start+1
+						end = MAX
+						findOne()
+					})
+				}
+			})
 		}
+		hasLEQ(MAX, has => {
+			if (has) {
+				split()
+			}
+		})			
 	}
+	findOne()
 }
 
-const split = (start, end) => {
+const selectMiddle = (start, end) => {
 	return Math.floor((start + end) / 2)
+}
+
+module.exports = {
+	address
 }
