@@ -1,5 +1,3 @@
-var parallel = require('async/parallel')
-
 const addressSearch = (hasLEQ, onFind) => {
 	const MAX = 16777216
 	var start = 0
