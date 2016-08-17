@@ -1,4 +1,4 @@
-import parallel from 'async/parallel'
+var parallel = require('async/parallel')
 
 const addressSearch = (hasLEQ, onFind) => {
 	const MAX = 16777216
