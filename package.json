@@ -1,0 +1,11 @@
+{
+  "name": "salvador",
+  "version": "1.0.0",
+  "description": "Converts high-level commands into Dali words",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
+}
