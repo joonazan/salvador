@@ -1,6 +1,6 @@
 import parallel from 'async/parallel'
 
-const genericAddressing = (hasLEQ, onFind) => {
+const addressSearch = (hasLEQ, onFind) => {
 	const MAX = 16777216
 	var start = 0
 	var end = MAX
@@ -41,7 +41,7 @@ const selectMiddle = (start, end) => {
 
 const address = dali => {
 	var smallestFreeShortAddress = 0
-	genericAddressing(
+	addressSearch(
 		(x, cb) => {
 			broadcastLongAddress(x)
 			dali(0xA9, 0, resp => {cb(resp == 0xFF)})
@@ -62,6 +62,6 @@ const broadcastLongAddress = (dali, x) => {
 }
 
 module.exports = {
-	genericAddressing,
+	addressSearch,
 	address
 }

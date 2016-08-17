@@ -19,7 +19,7 @@ describe('Addressing', () => {
 
 const testWithAddresses = addresses => {
 	var compareCalled = 0
-	salvador.genericAddressing(
+	salvador.addressSearch(
 		(x, cb) => {
 			compareCalled++
 			for (var i in addresses) {
