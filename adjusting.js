@@ -1,24 +1,21 @@
-const turnOnBallast = (dali, shortAddress) => {
-	dali(shortAddress << 1, 254)
-}
+const turnOffBallast = (dali, shortAddress) => dali((shortAddress << 1) | 1, 0)
+const turnOnBallast = (dali, shortAddress) => setBallastLightLevel(dali, shortAddress, 254)
+const setBallastLightLevel = (dali, shortAddress, x) => dali(shortAddress << 1, x)
 
-const turnOnGroup = (dali, group) => {
-	dali(GROUP_BIT | (group << 1), 254)
-}
+const turnOffGroup = (dali, group) => groupify(turnOffBallast)
+const turnOnGroup = (dali, group) => groupify(turnOnBallast)
+const setGroupLightLevel = (dali, group, x) => groupify(setBallastLightLevel)
 
-const turnOffBallast = (dali, shortAddress) => {
-	dali((shortAddress << 1) | 1, 0)
-}
+const groupify = f => (a, address, c) => f(a, (1 << 6) | address, c)
 
-const turnOffGroup = (dali, group) => {
-	dali(GROUP_BIT | (group << 1) | 1, 0)
-}
 
-const GROUP_BIT = (1 << 7)
 
 module.exports = {
 	turnOnBallast,
-	turnOnGroup,
 	turnOffBallast,
+	setBallastLightLevel,
+
+	turnOnGroup,
 	turnOffGroup,
+	setGroupLightLevel
 }
