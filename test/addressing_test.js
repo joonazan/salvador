@@ -1,4 +1,4 @@
-var salvador = require('..')
+var salvador = require('../addressing.js')
 require('must/register')
 
 describe('Addressing', () => {
