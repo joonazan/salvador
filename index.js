@@ -1,3 +1,5 @@
+// Find all addressses in the range 0 - 0xFFFFFF from low to high
+// Assumes that the found address has dissapeared when onFind calls its callback.
 const addressSearch = (hasLEQ, onFind, cb) => {
 	const MAX = 16777216
 	var start = 0
@@ -39,12 +41,13 @@ const selectMiddle = (start, end) => {
 	return Math.floor((start + end) / 2)
 }
 
+// Reassign all ballasts. Calls back with the number of ballasts found.
 const totalReaddressing = (dali, cb) => {
-	dali(0xA5, 0)
-	dali(0xA7, 0)
-	address(dali, () => {
-		dali(0xA1, 0)
-		cb()
+	dali(0xA5, 0) // initialization mode
+	dali(0xA7, 0) // randomize addresses
+	address(dali, found => {
+		dali(0xA1, 0) // end initialization
+		cb(found)
 	})
 }
 
@@ -61,7 +64,7 @@ const address = (dali, cb) => {
 			broadcastLongAddress(x)
 			dali(0xB7, a, cb)
 		},
-		cb
+		() => {cb(smallestFreeShortAddress)}
 	)
 }
 
