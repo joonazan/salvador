@@ -8,4 +8,4 @@ The functions provided by this library require you to implement a function with 
 
 Commands must be sent over Dali in the order the dali function is called.
 
-Commands 0xA5 and 0xA7 should be sent twice in rapid succession.
+Commands 0xA5 and 0xA7 and adding / removing from group should be sent twice in rapid succession.
