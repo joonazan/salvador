@@ -1,4 +1,4 @@
-const addressSearch = (hasLEQ, onFind) => {
+const addressSearch = (hasLEQ, onFind, cb) => {
 	const MAX = 16777216
 	var start = 0
 	var end = MAX
@@ -27,6 +27,8 @@ const addressSearch = (hasLEQ, onFind) => {
 		hasLEQ(MAX, has => {
 			if (has) {
 				split()
+			} else {
+				cb()
 			}
 		})			
 	}
@@ -37,7 +39,16 @@ const selectMiddle = (start, end) => {
 	return Math.floor((start + end) / 2)
 }
 
-const address = dali => {
+const totalReaddressing = (dali, cb) => {
+	dali(0xA5, 0)
+	dali(0xA7, 0)
+	address(dali, () => {
+		dali(0xA1, 0)
+		cb()
+	})
+}
+
+const address = (dali, cb) => {
 	var smallestFreeShortAddress = 0
 	addressSearch(
 		(x, cb) => {
@@ -49,7 +60,8 @@ const address = dali => {
 			smallestFreeShortAddress++
 			broadcastLongAddress(x)
 			dali(0xB7, a, cb)
-		}
+		},
+		cb
 	)
 }
 
@@ -61,5 +73,6 @@ const broadcastLongAddress = (dali, x) => {
 
 module.exports = {
 	addressSearch,
-	address
+	address,
+	totalReaddressing
 }

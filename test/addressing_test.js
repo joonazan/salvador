@@ -35,8 +35,10 @@ const testWithAddresses = addresses => {
 			i.must.not.be(-1)
 			addresses.splice(i, 1)
 			cb()
+		},
+		() => {
+			console.log('comparisons: ', compareCalled)
+			addresses.must.be.empty()
 		}
 	)
-	console.log('comparisons: ', compareCalled)
-	addresses.must.be.empty()
 }
