@@ -4,7 +4,7 @@ Control lights without knowing a thing about the DALI protocol!
 
 ## Usage
 
-The functions provided by this library require you to implement a function with the signature `dali(command, address, cb?)`, where command is the DALI command and address is the target ballast's address. The callback, if present should be called with the DALI response.
+The functions provided by this library require you to implement a function with the signature `dali(address, command, cb?)`, where address is the eight most significant bits of the DALI command and command the least significant bits. The callback, if present should be called with the DALI response.
 
 Commands must be sent over Dali in the order the dali function is called.
 

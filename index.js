@@ -1,5 +1,8 @@
-var totalReaddressing = require('./addressing.js').totalReaddressing
+var readdress = require('./addressing.js').readdress
+var adjusting = require('./adjusting.js')
 
-module.exports = {
-	totalReaddressing
-}
+var exps = Object.assign({
+	readdress
+}, adjusting)
+
+module.exports = exps

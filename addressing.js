@@ -42,7 +42,7 @@ const selectMiddle = (start, end) => {
 }
 
 // Reassign all ballasts. Calls back with the number of ballasts found.
-const totalReaddressing = (dali, cb) => {
+const readdress = (dali, cb) => {
 	dali(0xA5, 0) // initialization mode
 	dali(0xA7, 0) // randomize addresses
 	address(dali, found => {
@@ -76,5 +76,5 @@ const broadcastLongAddress = (dali, x) => {
 
 module.exports = {
 	addressSearch,
-	totalReaddressing
+	readdress
 }
