@@ -43,8 +43,8 @@ const selectMiddle = (start, end) => {
 
 // Reassign all ballasts. Calls back with the number of ballasts found.
 const readdress = (dali, cb) => {
-	dali(0xA5, 0) // initialization mode
-	dali(0xA7, 0) // randomize addresses
+	dali(0xA5, 0, null, true) // initialization mode
+	dali(0xA7, 0, null, true) // randomize addresses
 	address(dali, found => {
 		dali(0xA1, 0) // end initialization
 		cb(found)
@@ -55,13 +55,13 @@ const address = (dali, cb) => {
 	var smallestFreeShortAddress = 0
 	addressSearch(
 		(x, cb) => {
-			broadcastLongAddress(x)
+			broadcastLongAddress(dali, x)
 			dali(0xA9, 0, resp => {cb(resp == 0xFF)})
 		},
 		(x, cb) => {
 			const a = smallestFreeShortAddress
 			smallestFreeShortAddress++
-			broadcastLongAddress(x)
+			broadcastLongAddress(dali, x)
 			dali(0xB7, a, cb)
 		},
 		() => {cb(smallestFreeShortAddress)}
