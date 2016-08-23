@@ -1,7 +1,7 @@
 // Find all addressses in the range 0 - 0xFFFFFF from low to high
 // Assumes that the found address has dissapeared when onFind calls its callback.
 const addressSearch = (hasLEQ, onFind, cb) => {
-	const MAX = 16777216
+	const MAX = 0xFFFFFF
 	var start = 0
 	var end = MAX
 
