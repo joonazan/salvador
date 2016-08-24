@@ -18,6 +18,7 @@ const addressSearch = (hasLEQ, onFind, cb) => {
 				if (start != end) {
 					split()
 				} else {
+					console.log('found long address', start)
 					onFind(start, () => {
 						start = start+1
 						end = MAX
@@ -62,7 +63,8 @@ const address = (dali, cb) => {
 			const a = smallestFreeShortAddress
 			smallestFreeShortAddress++
 			broadcastLongAddress(dali, x)
-			dali(0xB7, a, cb)
+			dali(0xB7, (a << 1) | 1, cb)
+			dali(0xAB, 0)
 		},
 		() => {cb(smallestFreeShortAddress)}
 	)
