@@ -9,7 +9,6 @@ const setGroupLightLevel = (dali, group, x) => groupify(setBallastLightLevel)
 const groupify = f => (a, address, c) => f(a, (1 << 6) | address, c)
 
 
-
 module.exports = {
 	turnOnBallast,
 	turnOffBallast,
