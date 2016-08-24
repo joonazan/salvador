@@ -9,7 +9,7 @@ var exps = Object.assign({
 }, adjusting, grouping, broadcast, blinking)
 
 const injectBackend = dali => {
-	mapped = {}
+	var mapped = {}
 	for (var name in exps) {
 		const n = name
 		mapped[n] = function() {
