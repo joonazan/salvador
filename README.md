@@ -4,7 +4,7 @@ Control lights without knowing a thing about the DALI protocol!
 
 ## Usage
 
-```
+```js
 var salvador = require('salvador')
 var backend = require('backend')
 
