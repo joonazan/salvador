@@ -7,4 +7,15 @@ var exps = Object.assign({
 	readdress
 }, adjusting, grouping, broadcast)
 
-module.exports = exps
+const injectBackend = dali => {
+	mapped = {}
+	for (var name in exps) {
+		const n = name
+		mapped[n] = function() {
+			return exps[n](dali, ...arguments)
+		}
+	}
+	return mapped
+} 
+
+module.exports = {exps, injectBackend}
