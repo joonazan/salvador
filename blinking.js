@@ -1,5 +1,6 @@
 var adj = require('./adjusting.js')
 
+// Blinks the given ballast. Returns a function for stopping the blinking.
 const blinkBallast = (dali, shortAddress) => {
 	var next = adj.turnOnBallast
 	
